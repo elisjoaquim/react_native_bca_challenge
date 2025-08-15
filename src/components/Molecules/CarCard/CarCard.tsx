@@ -1,5 +1,5 @@
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { memo } from 'react';
 import { Colors } from '../../../constants/Colors';
 import { CustomText } from '../../Atoms';
 import Icon from '../../Atoms/Icon/Icon';
@@ -11,7 +11,7 @@ import { formatPriceToCurrency } from '../../../helpers/StringHelpers';
 const CARD_IMAGE_PLACEHOLDER =
   '../../../../assets/images/car_img_placeholder.jpg';
 
-const CarCard = ({ onPress, item, onFavoritePress }: ICardProps) => {
+const CarCard = memo(({ onPress, item, onFavoritePress }: ICardProps) => {
   const { imageUrl, model, startingBid, auctionDateTime, favourite, id, make } =
     item;
   const { days, hours } = getMissingTime(auctionDateTime);
@@ -57,7 +57,7 @@ const CarCard = ({ onPress, item, onFavoritePress }: ICardProps) => {
       </View>
     </TouchableOpacity>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {

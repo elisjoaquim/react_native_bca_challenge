@@ -6,83 +6,92 @@ import {
 } from '../../../helpers/StringHelpers';
 import { TVehicles } from '../../../redux/store/reducers/vehicleReducer/type';
 import { CustomText } from '../../Atoms';
+import { memo } from 'react';
 
 const CARD_IMAGE_PLACEHOLDER =
   '../../../../assets/images/car_img_placeholder.jpg';
 
-const VehicleListItem = ({
-  item,
-  searchTerm,
-  onPress,
-}: {
-  item: TVehicles;
-  searchTerm: string;
-  onPress?: (id: number) => void;
-}) => {
-  const {
-    firstPart: makeFirstPart,
-    highLighted: makeHighLighted,
-    lastPart: makeLastPart,
-    text: makeText,
-  } = highlightMatchingString(item.make, searchTerm);
+const VehicleListItem = memo(
+  ({
+    item,
+    searchTerm,
+    onPress,
+  }: {
+    item: TVehicles;
+    searchTerm: string;
+    onPress?: (id: number) => void;
+  }) => {
+    const {
+      firstPart: makeFirstPart,
+      highLighted: makeHighLighted,
+      lastPart: makeLastPart,
+      text: makeText,
+    } = highlightMatchingString(item.make, searchTerm);
 
-  const {
-    firstPart: modelFirstPart,
-    highLighted: modelHighLighted,
-    lastPart: modelLastPart,
-    text: modelText,
-  } = highlightMatchingString(item.model, searchTerm);
+    const {
+      firstPart: modelFirstPart,
+      highLighted: modelHighLighted,
+      lastPart: modelLastPart,
+      text: modelText,
+    } = highlightMatchingString(item.model, searchTerm);
 
-  return (
-    <TouchableOpacity
-      style={styles.itemContainer}
-      onPress={() => onPress?.(item.id)}
-    >
-      <Image
-        source={
-          item.imageUrl
-            ? { uri: item.imageUrl }
-            : require(CARD_IMAGE_PLACEHOLDER)
-        }
-        style={styles.itemImage}
-      />
-      <View style={styles.itemDetails}>
-        <View style={styles.row}>
-          <CustomText style={styles.boldText}>Make:</CustomText>
-          <CustomText style={styles.makeModelText}>
-            {makeFirstPart || makeText}
-          </CustomText>
-          {makeHighLighted && (
-            <CustomText style={[styles.highlightedText, styles.makeModelText]}>
-              {makeHighLighted}
+    return (
+      <TouchableOpacity
+        style={styles.itemContainer}
+        onPress={() => onPress?.(item.id)}
+      >
+        <Image
+          source={
+            item.imageUrl
+              ? { uri: item.imageUrl }
+              : require(CARD_IMAGE_PLACEHOLDER)
+          }
+          style={styles.itemImage}
+        />
+        <View style={styles.itemDetails}>
+          <View style={styles.row}>
+            <CustomText style={styles.boldText}>Make:</CustomText>
+            <CustomText style={styles.makeModelText}>
+              {makeFirstPart || makeText}
             </CustomText>
-          )}
-          <CustomText style={styles.makeModelText}>{makeLastPart}</CustomText>
-        </View>
-        <View style={styles.row}>
-          <CustomText style={styles.boldText}>Model:</CustomText>
-          <CustomText style={styles.makeModelText}>
-            {modelFirstPart || modelText}
-          </CustomText>
-          {modelHighLighted && (
-            <CustomText style={[styles.highlightedText, styles.makeModelText]}>
-              {modelHighLighted}
+            {makeHighLighted && (
+              <CustomText
+                style={[styles.highlightedText, styles.makeModelText]}
+              >
+                {makeHighLighted}
+              </CustomText>
+            )}
+            <CustomText style={styles.makeModelText}>{makeLastPart}</CustomText>
+          </View>
+          <View style={styles.row}>
+            <CustomText style={styles.boldText}>Model:</CustomText>
+            <CustomText style={styles.makeModelText}>
+              {modelFirstPart || modelText}
             </CustomText>
-          )}
-          <CustomText style={styles.makeModelText}>{modelLastPart}</CustomText>
+            {modelHighLighted && (
+              <CustomText
+                style={[styles.highlightedText, styles.makeModelText]}
+              >
+                {modelHighLighted}
+              </CustomText>
+            )}
+            <CustomText style={styles.makeModelText}>
+              {modelLastPart}
+            </CustomText>
+          </View>
+          <View style={styles.row}>
+            <CustomText style={styles.boldText}>Year:</CustomText>
+            <CustomText>{item.year}</CustomText>
+          </View>
         </View>
-        <View style={styles.row}>
-          <CustomText style={styles.boldText}>Year:</CustomText>
-          <CustomText>{item.year}</CustomText>
+        <View style={styles.bidContainer}>
+          <CustomText style={styles.boldText}>Starting Bid</CustomText>
+          <CustomText>{formatPriceToCurrency(item.startingBid)}</CustomText>
         </View>
-      </View>
-      <View style={styles.bidContainer}>
-        <CustomText style={styles.boldText}>Starting Bid</CustomText>
-        <CustomText>{formatPriceToCurrency(item.startingBid)}</CustomText>
-      </View>
-    </TouchableOpacity>
-  );
-};
+      </TouchableOpacity>
+    );
+  },
+);
 
 const styles = StyleSheet.create({
   itemContainer: {

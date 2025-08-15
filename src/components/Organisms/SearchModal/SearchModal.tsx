@@ -1,5 +1,5 @@
 import { StyleSheet, TextInput, View } from 'react-native';
-import React, { useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { ModalContainer, VehicleListItem } from '../../Molecules';
 import { ISearchModalProps } from './types';
 import { Colors } from '../../../constants/Colors';
@@ -9,56 +9,58 @@ import { filterVehicles } from '../../../helpers/StringHelpers';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { SCREENS, ScreensParamList } from '../../../screens/types';
 
-const SearchModal = ({ vehicles, onClose, ...rest }: ISearchModalProps) => {
-  const [searchTerm, setSearchTerm] = React.useState('');
-  const navigation = useNavigation<NavigationProp<ScreensParamList>>();
+const SearchModal = memo(
+  ({ vehicles, onClose, ...rest }: ISearchModalProps) => {
+    const [searchTerm, setSearchTerm] = React.useState('');
+    const navigation = useNavigation<NavigationProp<ScreensParamList>>();
 
-  const filteredVehicles = useMemo(
-    () => filterVehicles(vehicles, searchTerm),
-    [vehicles, searchTerm],
-  );
+    const filteredVehicles = useMemo(
+      () => filterVehicles(vehicles, searchTerm),
+      [vehicles, searchTerm],
+    );
 
-  return (
-    <ModalContainer {...rest} title="Search" onClose={onClose}>
-      <View style={styles.container}>
-        <Icon style={styles.icon} name="Search" />
-        <TextInput
-          autoFocus
-          style={styles.textInput}
-          placeholder="Search vehicles by make, model, starting bid..."
-          placeholderTextColor={Colors.gray}
-          defaultValue={searchTerm}
-          onChangeText={setSearchTerm}
-          returnKeyType="done"
-        />
-        {filteredVehicles.length > 0 ? (
-          <FlashList
-            data={filteredVehicles}
-            renderItem={({ item }) => (
-              <VehicleListItem
-                item={item}
-                searchTerm={searchTerm}
-                onPress={() => {
-                  onClose();
-                  navigation.navigate(SCREENS.DETAILS, {
-                    vehicleId: item.id,
-                  });
-                }}
-              />
-            )}
+    return (
+      <ModalContainer {...rest} title="Search" onClose={onClose}>
+        <View style={styles.container}>
+          <Icon style={styles.icon} name="Search" />
+          <TextInput
+            autoFocus
+            style={styles.textInput}
+            placeholder="Search vehicles by make, model, starting bid..."
+            placeholderTextColor={Colors.gray}
+            defaultValue={searchTerm}
+            onChangeText={setSearchTerm}
+            returnKeyType="done"
           />
-        ) : (
-          <View style={styles.noResultsContainer}>
-            <Icon name="SearchX" size={60} color={Colors.gray} />
-            <CustomText style={styles.noResultsText}>
-              No results found
-            </CustomText>
-          </View>
-        )}
-      </View>
-    </ModalContainer>
-  );
-};
+          {filteredVehicles.length > 0 ? (
+            <FlashList
+              data={filteredVehicles}
+              renderItem={({ item }) => (
+                <VehicleListItem
+                  item={item}
+                  searchTerm={searchTerm}
+                  onPress={() => {
+                    onClose();
+                    navigation.navigate(SCREENS.DETAILS, {
+                      vehicleId: item.id,
+                    });
+                  }}
+                />
+              )}
+            />
+          ) : (
+            <View style={styles.noResultsContainer}>
+              <Icon name="SearchX" size={60} color={Colors.gray} />
+              <CustomText style={styles.noResultsText}>
+                No results found
+              </CustomText>
+            </View>
+          )}
+        </View>
+      </ModalContainer>
+    );
+  },
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
     left: 8,
     top: 20,
     zIndex: 1,
-    transform: [{ translateY: '-50%' }], // approximate vertical centering
+    transform: [{ translateY: '-50%' }], // It does not work in previous react-native versions (Just tested xD)
   },
   noResultsContainer: {
     paddingTop: 100,

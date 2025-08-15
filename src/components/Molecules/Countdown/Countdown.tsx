@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { ReText } from 'react-native-redash';
 import { useCountdown } from '../../../hooks/useCountdown';
 import { Colors } from '../../../constants/Colors';
 import { ICountdownProps } from './types';
 
-const Countdown = ({ startTime, onEnd, style }: ICountdownProps) => {
+const Countdown = memo(({ startTime, onEnd, style }: ICountdownProps) => {
   const { days, hours, minutes, seconds } = useCountdown(startTime, onEnd);
 
   return (
@@ -16,7 +16,7 @@ const Countdown = ({ startTime, onEnd, style }: ICountdownProps) => {
       <ReText text={seconds} style={styles.text} />
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
