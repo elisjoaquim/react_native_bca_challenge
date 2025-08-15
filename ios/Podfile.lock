@@ -1,5 +1,4 @@
 PODS:
-  - BEMCheckBox (1.4.1)
   - boost (1.84.0)
   - DoubleConversion (1.1.6)
   - fast_float (8.0.0)
@@ -2242,9 +2241,6 @@ PODS:
     - React-perflogger (= 0.80.2)
     - React-utils (= 0.80.2)
     - SocketRocket
-  - RNCCheckbox (0.5.20):
-    - BEMCheckBox (~> 1.4)
-    - React-Core
   - RNReanimated (4.0.2):
     - boost
     - DoubleConversion
@@ -2624,7 +2620,6 @@ DEPENDENCIES:
   - ReactAppDependencyProvider (from `build/generated/ios`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - "RNCCheckbox (from `../node_modules/@react-native-community/checkbox`)"
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -2634,7 +2629,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - BEMCheckBox
     - SocketRocket
 
 EXTERNAL SOURCES:
@@ -2785,8 +2779,6 @@ EXTERNAL SOURCES:
     :path: build/generated/ios
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
-  RNCCheckbox:
-    :path: "../node_modules/@react-native-community/checkbox"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -2799,7 +2791,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
   fast_float: b32c788ed9c6a8c584d114d0047beda9664e7cc6
@@ -2873,7 +2864,6 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: 8df342c127fd0c1e30e8b9f71ff814c22414a7c0
   ReactCodegen: 439c427ccc115d71d16cc84256e5fbdc7fcef57a
   ReactCommon: 592ef441605638b95e533653259254b4bd35ff4f
-  RNCCheckbox: 33b44487ca8008394ce658cc32b26eab04f426ef
   RNReanimated: e8c97df80681b4a8c1737e3526f690db141156f7
   RNScreens: c63849403489bd068ea160f276fbc8416f19f2f7
   RNSVG: d407e5f2ede12bbcd92e4d23a405ad5a5f7294a3

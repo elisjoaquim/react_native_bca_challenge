@@ -26,6 +26,7 @@ const SearchModal = ({ vehicles, onClose, ...rest }: ISearchModalProps) => {
           autoFocus
           style={styles.textInput}
           placeholder="Search vehicles by make, model, starting bid..."
+          placeholderTextColor={Colors.gray}
           defaultValue={searchTerm}
           onChangeText={setSearchTerm}
           returnKeyType="done"
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     transform: [{ translateY: '-50%' }], // approximate vertical centering
   },
   noResultsContainer: {
-    flex: 1,
+    paddingTop: 100,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 10,

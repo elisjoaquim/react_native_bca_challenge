@@ -1,11 +1,11 @@
 import { View, StyleSheet, Alert } from 'react-native';
 import React from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import HeaderTitle from '../components/Molecules/HeaderTitle/HeaderTitle';
 import { FlashList } from '@shopify/flash-list';
 import { CarCard } from '../components/Molecules';
 import useVehicles from '../hooks/useVehicles';
 import { FavoritesScreenProps, SCREENS } from './types';
+import { SafeAreaViewFixed } from '../components/Atoms';
 
 const Favorites = ({ navigation }: FavoritesScreenProps) => {
   const { getAllFavorites, toggleFavourite } = useVehicles();
@@ -28,7 +28,7 @@ const Favorites = ({ navigation }: FavoritesScreenProps) => {
   };
 
   return (
-    <SafeAreaView edges={['top', 'left', 'right']} style={styles.safeArea}>
+    <SafeAreaViewFixed edges={['top', 'left', 'right']} style={styles.safeArea}>
       <View style={styles.container}>
         <HeaderTitle style={styles.headerTitle} title="Your Favorites" />
         <FlashList
@@ -48,7 +48,7 @@ const Favorites = ({ navigation }: FavoritesScreenProps) => {
           showsVerticalScrollIndicator={false}
         />
       </View>
-    </SafeAreaView>
+    </SafeAreaViewFixed>
   );
 };
 
