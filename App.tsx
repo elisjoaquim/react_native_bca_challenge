@@ -9,7 +9,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from './src/components/Atoms/Icon/Icon';
 import { Colors } from './src/constants/Colors';
 import { PortalProvider } from '@gorhom/portal';
-import useAppInitializers from './src/hooks/useAppInitializers';
 
 const Stack = createNativeStackNavigator<ScreensParamList>();
 const Tab = createBottomTabNavigator<ScreensParamList>();
@@ -48,8 +47,6 @@ function InitialTabScreens() {
 }
 
 function App() {
-  useAppInitializers();
-
   return (
     <Provider store={store}>
       <SafeAreaProvider>

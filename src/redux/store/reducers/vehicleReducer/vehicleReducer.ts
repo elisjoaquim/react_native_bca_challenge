@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { TVehicles, TVehiclesState } from './type';
+import { TVehiclesState } from './type';
 import VEHICLES_DATA from '../../../../../assets/data/vehicles.json';
+import { mapVehiclesById } from '../../../../helpers/ObjectHelpers';
 
 const SLICE_NAME = 'vehicles';
 
@@ -8,7 +9,7 @@ const SLICE_NAME = 'vehicles';
  * Initial state
  */
 const initialState: TVehiclesState = {
-  vehicles: {},
+  vehicles: mapVehiclesById(VEHICLES_DATA),
 };
 
 /**
@@ -24,13 +25,6 @@ const VehiclesSlice = createSlice({
         state.vehicles[vehicleId].favourite =
           !state.vehicles[vehicleId].favourite;
       }
-    },
-    mapVehiclesById: state => {
-      const vehiclesById: Record<number, TVehicles> = {};
-      VEHICLES_DATA.forEach(vehicle => {
-        vehiclesById[vehicle.id] = vehicle;
-      });
-      state.vehicles = vehiclesById;
     },
   },
 });
