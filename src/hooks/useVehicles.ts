@@ -1,16 +1,9 @@
-import { useMemo } from 'react';
-import { useAppSelector } from './useRedux';
-import { TVehicles } from '../redux/store/reducers/vehicleReducer/type';
-import { useDispatch } from 'react-redux';
-import { vehicleActions } from '../redux/store/reducers/vehicleReducer/vehicleReducer';
+import { useContext, useMemo } from 'react';
+import { TVehicles } from '../contexts/VehicleContext/types';
+import { VehicleContext } from '../contexts/VehicleContext/vehicleContext';
 
 const useVehicles = () => {
-  const vehicles = useAppSelector(state => state.vehicles.vehicles);
-  const dispatch = useDispatch();
-
-  const toggleFavourite = (vehicleId: number) => {
-    dispatch(vehicleActions.toggleFavourite(vehicleId));
-  };
+  const { vehicles, toggleFavourite } = useContext(VehicleContext);
 
   const getAllVehicles = useMemo(() => {
     return Object.values(vehicles);

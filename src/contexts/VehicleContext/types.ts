@@ -15,3 +15,7 @@ export type TVehicles = {
   imageUrl?: string;
   id: number;
 };
+
+export type TVehicleContext = TVehiclesState & {
+  toggleFavourite: (id: number) => void;
+};

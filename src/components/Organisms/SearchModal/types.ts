@@ -1,4 +1,4 @@
-import { TVehicles } from '../../../redux/store/reducers/vehicleReducer/type';
+import { TVehicles } from '../../../contexts/VehicleContext/types';
 import { IModalContainerProps } from '../../Molecules/ModalContainer/types';
 
 export interface ISearchModalProps

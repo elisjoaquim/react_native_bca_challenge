@@ -1,4 +1,4 @@
-import { TVehicles } from '../redux/store/reducers/vehicleReducer/type';
+import { TVehicles } from '../contexts/VehicleContext/types';
 
 export const mapVehiclesById = (
   data: TVehicles[],

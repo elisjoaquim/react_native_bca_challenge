@@ -3,12 +3,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NAVIGATORS, SCREENS, ScreensParamList } from './src/screens/types';
 import { CarDetails, Favorites, Home } from './src/screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Provider } from 'react-redux';
-import store from './src/redux/store';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from './src/components/Atoms/Icon/Icon';
 import { Colors } from './src/constants/Colors';
 import { PortalProvider } from '@gorhom/portal';
+import { VehicleProvider } from './src/contexts/VehicleContext/vehicleContext';
 
 const Stack = createNativeStackNavigator<ScreensParamList>();
 const Tab = createBottomTabNavigator<ScreensParamList>();
@@ -48,7 +47,7 @@ function InitialTabScreens() {
 
 function App() {
   return (
-    <Provider store={store}>
+    <VehicleProvider>
       <SafeAreaProvider>
         <PortalProvider>
           <NavigationContainer>
@@ -62,7 +61,7 @@ function App() {
           </NavigationContainer>
         </PortalProvider>
       </SafeAreaProvider>
-    </Provider>
+    </VehicleProvider>
   );
 }
 
